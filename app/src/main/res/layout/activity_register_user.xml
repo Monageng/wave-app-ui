@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="za.co.wave.waveapp.activities.RegisterUser">
+
+    <ScrollView
+        android:layout_width="351dp"
+        android:layout_height="464dp"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="2dp">
+
+                <TableRow
+                    android:layout_width="368dp"
+                    android:layout_height="495dp"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <TextView
+                        android:id="@+id/edit123"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="UserName" />
+
+                    <EditText
+                        android:id="@+id/usernameTxt"
+                        android:layout_width="115dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="368dp"
+                    android:layout_height="495dp"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <TextView
+                        android:id="@+id/editText1231"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Password" />
+
+                    <EditText
+                        android:id="@+id/passwordTxt"
+                        android:layout_width="115dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="368dp"
+                    android:layout_height="495dp"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <TextView
+                        android:id="@+id/editText1211"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Role" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/artistRadio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Artist" />
+
+                        <RadioButton
+                            android:id="@+id/fanRadio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Fan" />
+
+                    </RadioGroup>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="368dp"
+                    android:layout_height="495dp"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <TextView
+                        android:id="@+id/editText121"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name" />
+
+                    <EditText
+                        android:id="@+id/nameTxt"
+                        android:layout_width="115dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="368dp"
+                    android:layout_height="495dp"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <TextView
+                        android:id="@+id/editText112"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Surname" />
+
+                    <EditText
+                        android:id="@+id/surnameTxt"
+                        android:layout_width="115dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="368dp"
+                    android:layout_height="495dp"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <TextView
+                        android:id="@+id/editText113"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date Of Birth" />
+
+                    <EditText
+                        android:id="@+id/dateOfBirthTxt"
+                        android:layout_width="115dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="368dp"
+                    android:layout_height="495dp"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <TextView
+                        android:id="@+id/editText114"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Race" />
+
+                    <EditText
+                        android:id="@+id/raceTxt"
+                        android:layout_width="115dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="368dp"
+                    android:layout_height="495dp"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <TextView
+                        android:id="@+id/editText115"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CellNumber" />
+
+                    <EditText
+                        android:id="@+id/cellNumberTxt"
+                        android:layout_width="115dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="368dp"
+                    android:layout_height="495dp"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <TextView
+                        android:id="@+id/editText116"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email Address" />
+
+                    <EditText
+                        android:id="@+id/emailAddressTxt"
+                        android:layout_width="115dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_height="wrap_content"
+                        android:onClick="home"
+                        android:text="Home" />
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="doRegister"
+                        android:text="Register" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
