@@ -1,8 +1,10 @@
 package za.co.wave.waveapp.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ import org.json.JSONObject;
 import za.co.wave.waveapp.R;
 import za.co.wave.waveapp.*;
 import za.co.wave.waveapp.process.UserProfile;
+import za.co.wave.waveapp.utils.DialogBoxUtil;
 import za.co.wave.waveapp.utils.ViewValidator;
 
 public class RegisterUser extends AppCompatActivity {
@@ -35,7 +38,7 @@ public class RegisterUser extends AppCompatActivity {
 
     private void validateView(View view) throws Exception {
 
-       boolean isValid = viewValidator.validateMandatoryEditText(findViewById(R.id.usernameTxt));
+      // boolean isValid = viewValidator.validateMandatoryEditText(findViewById(R.id.usernameTxt));
         //viewValidator.validateMandatoryEditText(findViewById(R.id.usernameTxt))? isValid = true  throw new  Exception("e");
 
         /*EditText editName = (EditText) findViewById(R.id.editName);
@@ -63,9 +66,9 @@ public class RegisterUser extends AppCompatActivity {
             errorMessage = errorMessage + " , " + e.getMessage() + ", \r\n";
         }*/
 
-        if (!isValid) {
-            throw new Exception("Validation failed");
-        }
+       // if (!isValid) {
+       //     throw new Exception("Validation failed");
+        //}
     }
 
     public void doRegister(View view) {
@@ -117,12 +120,26 @@ public class RegisterUser extends AppCompatActivity {
             userCredentialJson.put("password", password);
             jsonObject.put("userCredential",userCredentialJson);
             userProfile.createUserProfile(jsonObject);
-
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
 
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+            DialogBoxUtil.createOKDialogBox(this, e.getMessage());
+            /*final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage(e.getMessage());
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            alertDialog.dismiss();
+                        }
+                    });
+            alertDialog.show(); */
+
         }
 
 

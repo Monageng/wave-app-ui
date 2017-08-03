@@ -15,7 +15,7 @@ import java.net.URL;
 
 public class HTTPHelper {
 
-    private static final String HOST_NAME = "192.168.43.177";//"46.101.255.101";
+    private static final String HOST_NAME = "46.101.255.101";
     private static final String PORT = "8080";
     private static final String PATH_GET_TRANSACTIONS = "/carwash/rest/ClientService/transactions";
     private static final String EMAIL_PASSWORD = "metswalle123" ;

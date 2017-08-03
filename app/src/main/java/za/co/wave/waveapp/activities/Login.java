@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +36,9 @@ public class Login extends AppCompatActivity {
             if (isAuthenticated) {
                 Intent intent = new Intent(this, Home.class);
                 startActivity(intent);
+            } else {
+                ((TextView)findViewById(R.id.loginMessage)).setText("Login failed, please check username or password is correct");
+
             }
         } catch (JSONException e) {
             e.printStackTrace();

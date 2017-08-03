@@ -15,7 +15,7 @@ import za.co.wave.waveapp.utils.HTTPHelper;
 public class UserProfile {
 
     HttpURLConnection con;
-    public void createUserProfile(JSONObject jsonObject) {
+    public void createUserProfile(JSONObject jsonObject) throws Exception {
         try {
             HTTPHelper httpHelper = new HTTPHelper();
 
@@ -41,13 +41,17 @@ public class UserProfile {
 
             if(responseCode == HttpURLConnection.HTTP_OK){
                 String server_response = httpHelper.readStream(con.getInputStream());
+            } else {
+
+                throw new Exception("Username already exists");
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+            throw new Exception(e.getMessage());
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
 
         finally {
