@@ -2,6 +2,7 @@ package za.co.wave.waveapp.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.StrictMode;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
@@ -18,6 +19,7 @@ import za.co.wave.waveapp.R;
 import za.co.wave.waveapp.*;
 import za.co.wave.waveapp.process.UserProfile;
 import za.co.wave.waveapp.utils.DialogBoxUtil;
+import za.co.wave.waveapp.utils.UserProfileValidator;
 import za.co.wave.waveapp.utils.ViewValidator;
 
 public class RegisterUser extends AppCompatActivity {
@@ -36,39 +38,26 @@ public class RegisterUser extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void validateView(View view) throws Exception {
-
-      // boolean isValid = viewValidator.validateMandatoryEditText(findViewById(R.id.usernameTxt));
-        //viewValidator.validateMandatoryEditText(findViewById(R.id.usernameTxt))? isValid = true  throw new  Exception("e");
-
-        /*EditText editName = (EditText) findViewById(R.id.editName);
-        if (editName.getText().length() < 1) {
-            errorMessage = errorMessage + " Name is mandatory, \r\n";
+    private boolean validateView(View view) throws Exception {
+        boolean isValid = true;
+        ((EditText)findViewById(R.id.emailAddressTxt)).setError(null);
+        ((EditText)findViewById(R.id.passwordTxt)).setError(null);
+        // Validate password
+        String password = String.valueOf(((EditText)findViewById(R.id.passwordTxt)).getText());
+        if(!UserProfileValidator.isPasswordValid(password)) {
+            isValid = false;
+            ((EditText)findViewById(R.id.passwordTxt)).setError("Password must have atleast a lower case\n" +
+                    " , an upper case letter \n" +
+                    " , a special character \n" +
+                    " , atleast 8 characters\n");
         }
+        String email = String.valueOf(((EditText)findViewById(R.id.emailAddressTxt)).getText());
 
-        EditText editSurname = (EditText) findViewById(R.id.editSurname);
-        if (editSurname.getText().length() < 1) {
-            errorMessage = errorMessage + " Surname is mandatory, \r\n";
+        if(!email.isEmpty() && !UserProfileValidator.isEmailValid(email.trim().toLowerCase())) {
+            isValid = false;
+            ((EditText)findViewById(R.id.emailAddressTxt)).setError("Email address is invalid");
         }
-
-        EditText editRegNo = (EditText) findViewById(R.id.editRegNo);
-        if (editRegNo.getText().length() < 1) {
-            errorMessage = errorMessage + " Registration no is mandatory, \r\n";
-        }
-        EditText editDateOfBirth = (EditText) findViewById(R.id.editDateOfBirth);
-        if (editDateOfBirth.getText().length() <  1) {
-            errorMessage = errorMessage + " DateOfBirth is mandatory, \r\n";
-        }
-        String dateInput = editDateOfBirth.getText().toString();
-        try {
-            Date date = DateUtils.parseToDate(dateInput, DateUtils.PATTERN_YYYY_MM_DD );
-        } catch (Exception e) {
-            errorMessage = errorMessage + " , " + e.getMessage() + ", \r\n";
-        }*/
-
-       // if (!isValid) {
-       //     throw new Exception("Validation failed");
-        //}
+        return isValid;
     }
 
     public void doRegister(View view) {
@@ -77,51 +66,53 @@ public class RegisterUser extends AppCompatActivity {
         UserProfile userProfile = new UserProfile();
         try {
 
-            validateView(view);
-
-            String username = String.valueOf(((EditText)findViewById(R.id.usernameTxt)).getText());
-            String password = String.valueOf(((EditText)findViewById(R.id.passwordTxt)).getText());
-            String name = String.valueOf(((EditText)findViewById(R.id.nameTxt)).getText());
-            String surname = String.valueOf(((EditText)findViewById(R.id.surnameTxt)).getText());
-            String dateOfBirth = String.valueOf(((EditText)findViewById(R.id.dateOfBirthTxt)).getText());
-            String race = String.valueOf(((EditText)findViewById(R.id.raceTxt)).getText());
-            String cellNumber = String.valueOf(((EditText)findViewById(R.id.cellNumberTxt)).getText());
-            String email = String.valueOf(((EditText)findViewById(R.id.emailAddressTxt)).getText());
-
+            if (validateView(view)) {
+                String username = String.valueOf(((EditText)findViewById(R.id.usernameTxt)).getText());
+                String password = String.valueOf(((EditText)findViewById(R.id.passwordTxt)).getText());
+                String name = String.valueOf(((EditText)findViewById(R.id.nameTxt)).getText());
+                String surname = String.valueOf(((EditText)findViewById(R.id.surnameTxt)).getText());
+                String dateOfBirth = String.valueOf(((EditText)findViewById(R.id.dateOfBirthTxt)).getText());
+                String race = String.valueOf(((EditText)findViewById(R.id.raceTxt)).getText());
+                String cellNumber = String.valueOf(((EditText)findViewById(R.id.cellNumberTxt)).getText());
+                String email = String.valueOf(((EditText)findViewById(R.id.emailAddressTxt)).getText());
 
 
-            String role = null;
-            boolean isArtistSelected = ((RadioButton)findViewById(R.id.artistRadio)).isSelected();
-            if (isArtistSelected) {
-                role = "ARTIST";
-            } else {
-                role = "FAN";
+
+                String role = null;
+                boolean isArtistSelected = ((RadioButton)findViewById(R.id.artistRadio)).isSelected();
+                if (isArtistSelected) {
+                    role = "ARTIST";
+                } else {
+                    role = "FAN";
+                }
+
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("name", name);
+                jsonObject.put("surname", surname);
+                jsonObject.put("dateOfBirth",dateOfBirth);
+                jsonObject.put("age","20");
+                jsonObject.put("race",race);
+                jsonObject.put("cellNumber", cellNumber);
+                jsonObject.put("emailAddress", email);
+                jsonObject.put("role", role);
+
+
+                JSONObject addressJson = new JSONObject();
+                addressJson.put("country", "South Africa");
+                addressJson.put("province","Gauteng");
+                addressJson.put("city", "Midrand");
+                jsonObject.put("address", addressJson);
+
+                JSONObject userCredentialJson = new JSONObject();
+                userCredentialJson.put("username", username);
+                userCredentialJson.put("password", password);
+                jsonObject.put("userCredential",userCredentialJson);
+                userProfile.createUserProfile(jsonObject);
+                Intent intent = new Intent(this, Login.class);
+                startActivity(intent);
+            }else {
+                //DialogBoxUtil.createOKDialogBox(this, e.getMessage());
             }
-
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("name", name);
-            jsonObject.put("surname", surname);
-            jsonObject.put("dateOfBirth",dateOfBirth);
-            jsonObject.put("age","20");
-            jsonObject.put("race",race);
-            jsonObject.put("cellNumber", cellNumber);
-            jsonObject.put("emailAddress", email);
-            jsonObject.put("role", role);
-
-
-            JSONObject addressJson = new JSONObject();
-            addressJson.put("country", "South Africa");
-            addressJson.put("province","Gauteng");
-            addressJson.put("city", "Midrand");
-            jsonObject.put("address", addressJson);
-
-            JSONObject userCredentialJson = new JSONObject();
-            userCredentialJson.put("username", username);
-            userCredentialJson.put("password", password);
-            jsonObject.put("userCredential",userCredentialJson);
-            userProfile.createUserProfile(jsonObject);
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
 
         } catch (JSONException e) {
             e.printStackTrace();

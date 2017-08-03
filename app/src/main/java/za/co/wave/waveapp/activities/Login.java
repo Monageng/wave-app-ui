@@ -38,7 +38,6 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             } else {
                 ((TextView)findViewById(R.id.loginMessage)).setText("Login failed, please check username or password is correct");
-
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -52,6 +51,8 @@ public class Login extends AppCompatActivity {
     public void doRegister(View view) {
         Intent intent = new Intent(this, RegisterUser.class);
         startActivity(intent);
+
+
     }
 
 }
